@@ -1,23 +1,25 @@
+from __future__ import annotations
+
 import logging
+import pdb
 
 import torch
-import pdb
-from src.evaluators import Evaluator
+
 from src.datasets.mnist_dataset import MNISTDataset
+from src.evaluators import Evaluator
 from src.util import torch_compute_matches
 
 logger = logging.getLogger("evaluate")
 
-class MNISTAccuracy(Evaluator):
 
+class MNISTAccuracy(Evaluator):
     def __init__(self, batch_size, mnist_data_path, device):
         super().__init__()
 
         self.batch_size = batch_size
         self.device = device
         # set up validation dataset
-        self.dataset = MNISTDataset(training=False,
-                                    mnist_data_path=mnist_data_path)
+        self.dataset = MNISTDataset(training=False, mnist_data_path=mnist_data_path)
 
     def evaluate(self, model_class):
         """Evaluation logic can be difficult, so this function
@@ -26,9 +28,11 @@ class MNISTAccuracy(Evaluator):
 
         model_class = model_class.to(self.device)
 
-        dataloader = torch.utils.data.DataLoader(self.dataset,
-                                                 batch_size=self.batch_size,
-                                                 collate_fn=self.dataset.collate_fn())
+        dataloader = torch.utils.data.DataLoader(
+            self.dataset,
+            batch_size=self.batch_size,
+            collate_fn=self.dataset.collate_fn(),
+        )
 
         logger.info("Starting evaluation loop.")
 

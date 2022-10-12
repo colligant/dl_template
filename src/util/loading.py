@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import importlib.util
 import inspect
 import json
@@ -17,28 +19,28 @@ from src import datasets, evaluators, models
 from src.util import pluginloader
 
 
-def load_models() -> Dict[str, Type[pl.LightningModule]]:
+def load_models() -> dict[str, type[pl.LightningModule]]:
     return {
         m.__name__: m
         for m in pluginloader.load_plugin_classes(models, pl.LightningModule)
     }
 
 
-def load_datasets() -> Dict[str, Type[datasets.DataModule]]:
+def load_datasets() -> dict[str, type[datasets.DataModule]]:
     return {
         m.__name__: m
         for m in pluginloader.load_plugin_classes(datasets, datasets.DataModule)
     }
 
 
-def load_evaluators() -> Dict[str, Type[evaluators.Evaluator]]:
+def load_evaluators() -> dict[str, type[evaluators.Evaluator]]:
     return {
         m.__name__: m
         for m in pluginloader.load_plugin_classes(evaluators, evaluators.Evaluator)
     }
 
 
-def _get_dataset(name: str) -> Type[datasets.DataModule]:
+def _get_dataset(name: str) -> type[datasets.DataModule]:
     dataset_dict = load_datasets()
 
     if name not in dataset_dict:
@@ -47,7 +49,7 @@ def _get_dataset(name: str) -> Type[datasets.DataModule]:
     return dataset_dict[name]
 
 
-def _get_evaluator(name: str) -> Type[evaluators.Evaluator]:
+def _get_evaluator(name: str) -> type[evaluators.Evaluator]:
     evaluator = load_evaluators()
 
     if name not in evaluator:
@@ -56,7 +58,7 @@ def _get_evaluator(name: str) -> Type[evaluators.Evaluator]:
     return evaluator[name]
 
 
-def _get_model(name: str) -> Type[pl.LightningModule]:
+def _get_model(name: str) -> type[pl.LightningModule]:
     model_dict = load_models()
 
     if name not in model_dict:

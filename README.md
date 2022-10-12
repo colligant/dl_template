@@ -13,7 +13,7 @@ Simple, huh?
 Well, kind of.
 
 The guts of the project are in `src/__init__.py`, `src/train_config.py` and `src/eval_config.py`.
-`src/__init__.py` dynamically loads the classes required for training and evaluation (a model class, defined in `src/models/`, 
+`src/__init__.py` dynamically loads the classes required for training and evaluation (a model class, defined in `src/models/`,
 a dataset, in `src/datasets/`, and an evaluator class `src/evaluators/`). It then smushes the models/datasets/evaluators
 together to either train or evaluate a model. Pytorch Lightning takes care of all of the training
 specifics through the `trainer_args` class in `src/train_config.py`.
@@ -22,10 +22,10 @@ All arguments to the model/dataset/evaluator classes are defined in the config f
 
 This structure tries to disentangle model, dataset, and evaluation code. Good rules of thumb: Don't import anything from
 src.models, src.datasets, or src.evaluators into other scripts. Rely on util/util.py to store helper functions and other
-operations that you use frequently. 
+operations that you use frequently.
 
 It's ok to hardcode variables for certain experiments since you can always copy/paste code when you want
-to start a new experiment. 
+to start a new experiment.
 
 Another cool feature: This project relies on `sacred (https://github.com/IDSIA/sacred)` to manage its CLI.
 This means that you can change arguments for training or evaluating via the command line. For example, if I wanted
@@ -38,11 +38,7 @@ be saved in the model log directory (configured in `train_config.py`).
 
 ### Adding new models/datasets/evaluators
 
-Easy! Just create a new file in src/models: `touch src/models/my_cool_idea.py` and create a class that inherits from 
+Easy! Just create a new file in src/models: `touch src/models/my_cool_idea.py` and create a class that inherits from
 `pl.LightningModule` (just as the `MNISTModel` does in src/models/mnist_classifier.py). Be sure to fill out the same methods
-as the MNISTModel. 
+as the MNISTModel.
 Creating a new dataset/evaluator is the exact same, just replace `models/` with `datasets`/`evaluators`.
-
-
-
-

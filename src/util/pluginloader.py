@@ -1,14 +1,15 @@
 """
 Module includes methods useful to loading all plugins placed in a folder, or module...
 """
+from __future__ import annotations
 
 import pkgutil
 import sys
 import warnings
-
-warnings.simplefilter("always", ImportWarning)
 from types import ModuleType
 from typing import Set, Type, TypeVar
+
+warnings.simplefilter("always", ImportWarning)
 
 # Generic type for method below
 T = TypeVar("T")
@@ -16,10 +17,10 @@ T = TypeVar("T")
 
 def load_plugin_classes(
     plugin_dir: ModuleType,
-    plugin_metaclass: Type[T],
+    plugin_metaclass: type[T],
     do_reload: bool = True,
     display_error: bool = True,
-) -> Set[Type[T]]:
+) -> set[type[T]]:
     """
     Loads all plugins, or classes, within the specified module folder and submodules that extend the provided metaclass
     type.
@@ -43,7 +44,7 @@ def load_plugin_classes(
     path = list(iter(plugin_dir.__path__))[0]
     rel_path = plugin_dir.__name__
 
-    plugins: Set[Type[T]] = set()
+    plugins: set[type[T]] = set()
 
     # Iterate all modules in specified directory using pkgutil, importing them if they are not in sys.modules
     for importer, mod_name, ispkg in pkgutil.iter_modules([path], rel_path + "."):
@@ -69,7 +70,9 @@ def load_plugin_classes(
         # Now we check if the module is a package, and if so, recursively call this method
         if ispkg:
             plugins = plugins | load_plugin_classes(
-                sub_module, plugin_metaclass, do_reload
+                sub_module,
+                plugin_metaclass,
+                do_reload,
             )
         else:
             # Otherwise we begin looking for plugin classes

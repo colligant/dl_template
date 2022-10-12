@@ -1,5 +1,9 @@
+from __future__ import annotations
+
 import logging
+
 from sacred import Experiment
+
 from src.util import to_dict
 
 logger = logging.getLogger("train")
@@ -7,11 +11,14 @@ logger.setLevel(logging.WARNING)
 
 train_ex = Experiment()
 
+
 @train_ex.config
 def config():
 
-    description = "This description of your experiment will be saved along with model " \
-                  "hyperparameters in log_dir."
+    description = (
+        "This description of your experiment will be saved along with model "
+        "hyperparameters in log_dir."
+    )
 
     model_name = "MNISTModel"
     dataset_name = "MNISTDataset"
@@ -24,7 +31,7 @@ def config():
     @to_dict
     class model_args:
         # notice python code execution
-        hidden_dimension = 28*28
+        hidden_dimension = 28 * 28
 
     @to_dict
     class train_dataset_args:
@@ -35,6 +42,7 @@ def config():
     class val_dataset_args:
         training = False
         mnist_data_path = "mnist_data/"
+
     # also can specify val dataset args
 
     @to_dict

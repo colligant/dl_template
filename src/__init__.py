@@ -1,6 +1,8 @@
 """
 This is a template created to ease the creation of new deep learning projects.
 """
+from __future__ import annotations
+
 __version__ = "0.0.1"
 
 import logging
@@ -20,9 +22,10 @@ from pytorch_lightning.plugins import DDPPlugin
 from sacred.observers import FileStorageObserver
 
 from src.callbacks import CallbackSet
-from src.train_config import train_ex
 from src.eval_config import evaluation_ex
-from src.util.loading import load_dataset_class, load_evaluator_class, load_model_class
+from src.train_config import train_ex
+from src.util.loading import (load_dataset_class, load_evaluator_class,
+                              load_model_class)
 
 
 @train_ex.config
@@ -75,12 +78,16 @@ def train(_config):
 
     print(f"Training model {params.model_name} with dataset {params.dataset_name}.")
     train_dataloader = torch.utils.data.DataLoader(
-        train_dataset, collate_fn=train_dataset.collate_fn(), **params.dataloader_args
+        train_dataset,
+        collate_fn=train_dataset.collate_fn(),
+        **params.dataloader_args,
     )
 
     if val_dataset is not None:
         val_dataloader = torch.utils.data.DataLoader(
-            val_dataset, collate_fn=val_dataset.collate_fn(), **params.dataloader_args
+            val_dataset,
+            collate_fn=val_dataset.collate_fn(),
+            **params.dataloader_args,
         )
     else:
         val_dataloader = None
@@ -92,11 +99,15 @@ def train(_config):
     )
 
     logger.experiment.add_text(
-        tag="description", text_string=params.description, walltime=time.time()
+        tag="description",
+        text_string=params.description,
+        walltime=time.time(),
     )
 
     trainer = Trainer(
-        **params.trainer_args, callbacks=CallbackSet.callbacks(), logger=logger
+        **params.trainer_args,
+        callbacks=CallbackSet.callbacks(),
+        logger=logger,
     )
 
     trainer.fit(
@@ -126,7 +137,8 @@ def evaluate(_config):
     params.logger.info(f"Loading from checkpoint in {params.checkpoint_path}")
 
     model = params.model_class.load_from_checkpoint(
-        params.checkpoint_path, map_location=torch.device(params.device)
+        params.checkpoint_path,
+        map_location=torch.device(params.device),
     ).to(params.device)
 
     evaluator = params.evaluator_class(**params.evaluator_args)

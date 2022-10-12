@@ -1,11 +1,13 @@
+from __future__ import annotations
+
 import pdb
 
 import pytorch_lightning as pl
-import torch.nn.functional as F
 import torch
+import torch.nn.functional as F
+
 
 class MNISTModel(pl.LightningModule):
-
     def __init__(self, hidden_dimension, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.l1 = torch.nn.Linear(28 * 28, hidden_dimension)

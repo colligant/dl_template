@@ -1,9 +1,12 @@
+from __future__ import annotations
+
 import logging
 import pdb
 from copy import deepcopy
 from glob import glob
 
 from sacred import Experiment
+
 from src.util import to_dict
 
 logger = logging.getLogger("evaluate")
@@ -25,9 +28,3 @@ def config():
         device = "cpu"
         batch_size = 32
         mnist_data_path = "mnist_data/"
-
-
-
-
-
-    
