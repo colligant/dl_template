@@ -1,3 +1,6 @@
+"""
+This is a template created to ease the creation of new deep learning projects.
+"""
 __version__ = "0.0.1"
 
 import logging
@@ -11,15 +14,13 @@ from types import SimpleNamespace
 
 import pytorch_lightning as pl
 import torch
-import torch.nn as nn
-import yaml
 from pytorch_lightning import Trainer, seed_everything
 from pytorch_lightning.loggers import TensorBoardLogger
 from pytorch_lightning.plugins import DDPPlugin
 from sacred.observers import FileStorageObserver
 
 from src.callbacks import CallbackSet
-from src.config import train_ex
+from src.train_config import train_ex
 from src.eval_config import evaluation_ex
 from src.util.loading import load_dataset_class, load_evaluator_class, load_model_class
 
@@ -110,11 +111,6 @@ def train(_config):
 def _cls_loader(model_name, evaluator_name):
     model_class = load_model_class(model_name)
     evaluator_class = load_evaluator_class(evaluator_name)
-
-
-@evaluation_ex.config
-def _thread_exporter(num_threads):
-    os.environ["NUM_THREADS"] = str(num_threads)
 
 
 @evaluation_ex.config

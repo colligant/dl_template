@@ -1,13 +1,20 @@
 [build-system]
-requires = ["flit_core >=3.2,<4"]
+requires = ["flit_core >=2,<4"]
 build-backend = "flit_core.buildapi"
 
-[project]
-name = "dl_temp"
-authors = [{name = "Thomas Colligan", email = "thomas.colligan@umontana.edu"}]
-license = {file = "LICENSE"}
-classifiers = ["License :: OSI Approved :: MIT License"]
-dynamic = ["version", "description"]
+[tool.flit.scripts]
+train = "src:train_main"
+evaluate = "src:evaluate_main"
 
-[project.urls]
-Home = "https://github.com/colligant/dl_temp"
+[tool.flit.metadata]
+module = "src"
+author = "Thomas Colligan"
+maintainer = "Thomas Colligan"
+maintainer-email = "thomas.colligan@arizon.edu"
+home-page = "https://github.com/colligan/dl_template"
+description-file = "README.md"
+
+[tool.flit.sdist]
+exclude = [
+    ".gitignore",
+]

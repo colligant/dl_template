@@ -6,8 +6,8 @@ from torch.utils.data.dataset import Dataset
 
 class DataModule(Dataset, ABC):
     @abstractmethod
-    def __init__(self, **kwargs):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     @abstractmethod
     def collate_fn(self):

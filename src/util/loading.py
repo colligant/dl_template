@@ -14,7 +14,7 @@ from typing import Dict, List, Optional, TextIO, Tuple, Type
 import pytorch_lightning as pl
 
 from src import datasets, evaluators, models
-from src.utils import pluginloader
+from src.util import pluginloader
 
 
 def load_models() -> Dict[str, Type[pl.LightningModule]]:
