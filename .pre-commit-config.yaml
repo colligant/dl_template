@@ -5,11 +5,9 @@ repos:
     rev: 22.3.0
     hooks:
     -   id: black
-        entry: bash -c 'black "$@"; git add -u' --
         language: python
 -   repo: https://github.com/pycqa/isort
     rev: 5.10.1
     hooks:
       - id: isort
-        entry: bash -c 'isort "$@"; git add -u' --
         name: isort (python)
