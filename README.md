@@ -44,3 +44,9 @@ as the MNISTModel.
 Creating a new dataset/evaluator is the exact same, just replace `models/` with `datasets`/`evaluators`.
 The dataset you create has to inherit from the `DataModule` class (in `src/datasets/__init__.py`), and the evaluator
 class has to inherit from the `Evaluator` class (in `src/evaluators/__init__.py`).
+
+### What's this .pre-commit-config.yaml thing?
+Pre-commit is a tool that runs checks when you enter `git commit`. Install in your pip environment with
+`pip install pre-commit`, setup with `pre-commit install`, and run an initial check with `pre-commit run --all-files`.
+If a test fails, you need to go in and fix it, either by running the command (like `black` or `isort`) or by fixing the file manually.
+You don't have to set this up but having consistent formatting makes collaboration easier.
