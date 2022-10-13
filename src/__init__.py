@@ -7,18 +7,14 @@ __version__ = "0.0.1"
 
 import logging
 import os
-import pdb
-import shutil
 import sys
 import time
 from pathlib import Path
 from types import SimpleNamespace
 
-import pytorch_lightning as pl
 import torch
 from pytorch_lightning import Trainer, seed_everything
 from pytorch_lightning.loggers import TensorBoardLogger
-from pytorch_lightning.plugins import DDPPlugin
 from sacred.observers import FileStorageObserver
 
 from src.callbacks import CallbackSet

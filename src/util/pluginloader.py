@@ -7,7 +7,7 @@ import pkgutil
 import sys
 import warnings
 from types import ModuleType
-from typing import Set, Type, TypeVar
+from typing import TypeVar
 
 warnings.simplefilter("always", ImportWarning)
 
