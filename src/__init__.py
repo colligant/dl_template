@@ -24,8 +24,7 @@ from sacred.observers import FileStorageObserver
 from src.callbacks import CallbackSet
 from src.eval_config import evaluation_ex
 from src.train_config import train_ex
-from src.util.loading import (load_dataset_class, load_evaluator_class,
-                              load_model_class)
+from src.util.loading import load_dataset_class, load_evaluator_class, load_model_class
 
 
 @train_ex.config

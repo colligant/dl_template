@@ -14,6 +14,9 @@ maintainer-email = "thomas.colligan@arizon.edu"
 home-page = "https://github.com/colligan/dl_template"
 description-file = "README.md"
 
+[tool.isort]
+profile = "black"
+
 [tool.flit.sdist]
 exclude = [
     ".gitignore",
