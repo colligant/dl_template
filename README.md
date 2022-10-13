@@ -41,7 +41,6 @@ be saved in the model log directory (configured in `train_config.py`).
 Easy! Just create a new file in src/models: `touch src/models/my_cool_idea.py` and create a class that inherits from
 `pl.LightningModule` (just as the `MNISTModel` does in src/models/mnist_classifier.py). Be sure to fill out the same methods
 as the MNISTModel.
-Creating a new dataset/evaluator is the exact same, just replace `models/` with `datasets`/`evaluators`. 
+Creating a new dataset/evaluator is the exact same, just replace `models/` with `datasets`/`evaluators`.
 The dataset you create has to inherit from the `DataModule` class (in `src/datasets/__init__.py`), and the evaluator
 class has to inherit from the `Evaluator` class (in `src/evaluators/__init__.py`).
-
